@@ -1,6 +1,11 @@
 import {RouterProvider, createRouter} from '@tanstack/react-router';
 import {routeTree} from './routeTree.gen';
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import Plausible from "plausible-tracker";
+
+const { enableAutoPageviews, enableAutoOutboundTracking } = Plausible()
+enableAutoPageviews()
+enableAutoOutboundTracking()
 
 const router = createRouter({routeTree});
 
