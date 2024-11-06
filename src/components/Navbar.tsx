@@ -2,6 +2,7 @@ import Container from "react-bootstrap/Container";
 import BootstrapNavbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
+import {Link} from "@tanstack/react-router";
 
 type NavbarProps = {
     isAuthenticated: boolean;
@@ -20,7 +21,7 @@ function Navbar({ isAuthenticated }: NavbarProps) {
                     <Nav className="me-auto">
                         <Nav.Link href="/articles"><strong>Articles</strong></Nav.Link>
                         <Nav.Link href="/groups"><strong>Groups</strong></Nav.Link>
-                        <Nav.Link href="/events"><strong>Events</strong></Nav.Link>
+                        <Link className="nav-link" to="/events"><strong>Events</strong></Link>
                         <Nav.Link href="/businesses"><strong>Businesses</strong></Nav.Link>
                         <Nav.Link href="/neighbor-services"><strong>NeighborServices™</strong></Nav.Link>
                     </Nav>
