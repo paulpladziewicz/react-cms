@@ -38,7 +38,7 @@ function RouteComponent() {
                     if (!nextAvailableDayEvent) return null;
 
                     return (
-                        <div className="row my-4" key={event.id}>
+                        <div className="row my-5" key={event.id}>
                             <div className="col-md-4">
                                 {event.status === 'CANCELED' && (
                                     <p className="fw-semibold text-danger mb-0">Canceled</p>
@@ -89,7 +89,7 @@ function RouteComponent() {
                 <Col lg={10} className="mx-auto">
                     <nav aria-label="breadcrumb">
                         <ol className="breadcrumb">
-                            <li className="breadcrumb-item"><Link to="/">Home</Link></li>
+                            <li className="breadcrumb-item"><a href="/">Home</a></li>
                             <li className="breadcrumb-item active" aria-current="page">Events</li>
                         </ol>
                     </nav>
