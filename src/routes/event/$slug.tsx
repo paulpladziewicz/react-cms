@@ -1,5 +1,6 @@
 import {createFileRoute, Link, useLocation} from '@tanstack/react-router'
 import {Col, Container, Row} from "react-bootstrap";
+import {useLayoutEffect, useRef} from "react";
 
 export const Route = createFileRoute('/event/$slug')({
     component: RouteComponent,
@@ -8,6 +9,11 @@ export const Route = createFileRoute('/event/$slug')({
 function RouteComponent() {
     const {state} = useLocation() // Access event data passed through state
     const event = state?.event
+    const breadcrumbRef = useRef(null);
+
+    useLayoutEffect(() => {
+        breadcrumbRef.current?.scrollIntoView({behavior: 'smooth'});
+    }, []);
 
     if (!event) {
         return <div>No event data available.</div>
@@ -21,7 +27,7 @@ function RouteComponent() {
         <Container>
             <Row>
                 <Col md={8} lg={10} className="mx-auto">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="breadcrumb" ref={breadcrumbRef}>
                         <ol className="breadcrumb mb-2">
                             <li className="breadcrumb-item"><Link to="/events">Events</Link></li>
                             <li className="breadcrumb-item active" aria-current="page">{title}</li>
