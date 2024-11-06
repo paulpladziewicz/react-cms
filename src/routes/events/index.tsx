@@ -9,7 +9,7 @@ export const Route = createFileRoute('/events/')({
 })
 
 async function fetchEvents(page = 0) {
-    const { data } = await axios.get(`http://localhost:8080/api/events`);
+    const { data } = await axios.get(`/api/events`);
     return data;
 }
 
