@@ -30,7 +30,7 @@ function RouteComponent() {
         }
 
         return (
-            <div>
+            <div className="mt-n4">
                 {data.content.map((event) => {
                     const nextAvailableDayEvent = event.detail.nextAvailableDayEvent;
                     const hasMultipleDates = event.detail.availableDayEventCount > 0;
@@ -88,20 +88,15 @@ function RouteComponent() {
             <Row>
                 <Col lg={10} className="mx-auto">
                     <nav aria-label="breadcrumb">
-                        <ol className="breadcrumb">
+                        <ol className="breadcrumb mb-2">
                             <li className="breadcrumb-item"><a href="/">Home</a></li>
                             <li className="breadcrumb-item active" aria-current="page">Events</li>
                         </ol>
                     </nav>
 
-                    <div className="d-sm-flex justify-content-between align-items-center">
-                        <h1 className="display-3 mb-0">Events</h1>
-                        <div className="d-flex justify-content-between align-items-center d-lg-block">
-                            <a href="/my/events"
-                               className="btn btn-sm btn-link fw-semibold fs-lg text-primary ps-0 ps-lg-2 py-2 px-3">My
-                                Events</a>
-                            <a href="/create/event" className="btn btn-sm fs-sm btn-primary py-2 px-3">Create</a>
-                        </div>
+                    <div className="d-sm-flex justify-content-between align-items-center mb-2">
+                        <h1 className="display-4 mb-0">Events</h1>
+                        <a href="/create/event" className="btn btn-link p-0">Add Event</a>
                     </div>
 
                     {renderEvents()}

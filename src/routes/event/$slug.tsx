@@ -25,7 +25,7 @@ function RouteComponent() {
     return (
         <Container>
             <Row>
-                <Col md={8} lg={10} className="mx-auto">
+                <Col lg={10} xl={8} className="mx-auto">
                     <nav aria-label="breadcrumb">
                         <ol className="breadcrumb mb-2">
                             <li className="breadcrumb-item"><Link to="/events">Events</Link></li>
