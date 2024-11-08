@@ -45,7 +45,7 @@ function RouteComponent() {
                         </div>
 
                         <p
-                            className="fs-xl mt-2 mb-4"
+                            className="fs-lg mt-2 mb-4"
                             dangerouslySetInnerHTML={{__html: description}}
                         />
 
