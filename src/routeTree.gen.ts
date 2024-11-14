@@ -11,10 +11,17 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as SearchIndexImport } from './routes/search/index'
 import { Route as EventsIndexImport } from './routes/events/index'
 import { Route as EventSlugImport } from './routes/event/$slug'
 
 // Create/Update Routes
+
+const SearchIndexRoute = SearchIndexImport.update({
+  id: '/search/',
+  path: '/search/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const EventsIndexRoute = EventsIndexImport.update({
   id: '/events/',
@@ -46,6 +53,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsIndexImport
       parentRoute: typeof rootRoute
     }
+    '/search/': {
+      id: '/search/'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -54,36 +68,41 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/event/$slug': typeof EventSlugRoute
   '/events': typeof EventsIndexRoute
+  '/search': typeof SearchIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/event/$slug': typeof EventSlugRoute
   '/events': typeof EventsIndexRoute
+  '/search': typeof SearchIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/event/$slug': typeof EventSlugRoute
   '/events/': typeof EventsIndexRoute
+  '/search/': typeof SearchIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/event/$slug' | '/events'
+  fullPaths: '/event/$slug' | '/events' | '/search'
   fileRoutesByTo: FileRoutesByTo
-  to: '/event/$slug' | '/events'
-  id: '__root__' | '/event/$slug' | '/events/'
+  to: '/event/$slug' | '/events' | '/search'
+  id: '__root__' | '/event/$slug' | '/events/' | '/search/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   EventSlugRoute: typeof EventSlugRoute
   EventsIndexRoute: typeof EventsIndexRoute
+  SearchIndexRoute: typeof SearchIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   EventSlugRoute: EventSlugRoute,
   EventsIndexRoute: EventsIndexRoute,
+  SearchIndexRoute: SearchIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -97,7 +116,8 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/event/$slug",
-        "/events/"
+        "/events/",
+        "/search/"
       ]
     },
     "/event/$slug": {
@@ -105,6 +125,9 @@ export const routeTree = rootRoute
     },
     "/events/": {
       "filePath": "events/index.tsx"
+    },
+    "/search/": {
+      "filePath": "search/index.tsx"
     }
   }
 }
