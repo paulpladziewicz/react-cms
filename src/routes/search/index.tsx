@@ -1,6 +1,6 @@
 import {createFileRoute} from '@tanstack/react-router';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import {Container} from "react-bootstrap";
+import {Container, Row, Col} from "react-bootstrap";
 import {useEffect, useState} from "react";
 
 export const Route = createFileRoute('/search/')({
@@ -27,8 +27,7 @@ function useSearchCards() {
         },
     });
 
-    const getCachedResults = (prompt) =>
-        queryClient.getQueryData(['cards', {prompt}]);
+    const getCachedResults = (prompt) => queryClient.getQueryData(['cards', {prompt}]);
 
     return {mutation, getCachedResults};
 }
@@ -37,7 +36,8 @@ function RouteComponent() {
     const [prompt, setPrompt] = useState('');
     const [cards, setCards] = useState([]);
     const [cachedPrompt, setCachedPrompt] = useState('');
-    const {mutation, getCachedResults} = useSearchCards();
+    const [error, setError] = useState(''); // State to track error messages
+    const { mutation, getCachedResults } = useSearchCards();
 
     useEffect(() => {
         const cachedData = getCachedResults(cachedPrompt);
@@ -47,8 +47,14 @@ function RouteComponent() {
     }, [cachedPrompt, getCachedResults]);
 
     const handleSearch = () => {
+        if (!prompt.trim()) {
+            setError('Please enter a prompt.');
+            return;
+        }
+
+        setError(''); // Clear any previous error
         mutation.mutate(
-            {prompt},
+            { prompt },
             {
                 onSuccess: (data) => {
                     setCards(data);
@@ -61,45 +67,65 @@ function RouteComponent() {
 
     return (
         <Container>
-            <div className="input-group rounded-pill">
-                <span className="input-group-text">
-                    <i className="ai-search"></i>
-                </span>
-                <input
-                    type="search"
-                    className="form-control"
-                    value={prompt}
-                    onChange={(e) => setPrompt(e.target.value)}
-                    placeholder="Search what you need or want to find"
-                />
-                <button
-                    type="button"
-                    className="btn btn-primary rounded-pill"
-                    onClick={handleSearch}
-                    disabled={mutation.isLoading}
-                >
-                    Search
-                </button>
-            </div>
+            <Row>
+                <Col lg={10} xl={8} className="mx-auto">
+                    <div>
+                        <h1>AI-Enhanced Search</h1>
+                        <p>Simply type any question or prompt—whether it’s a specific need, a task, or a curiosity—and we'll see what we can find for you.</p>
+                    </div>
 
-            {cards.length > 0 && (
-                <div className="mt-4">
-                    {cards.map((card) => (
-                        <a
-                            key={card.pathname}
-                            className="card mb-3"
-                            href={card.pathname}
-                            style={{cursor: 'pointer'}}
+                    <div className="input-group rounded-pill">
+                        <span className="input-group-text">
+                            <i className="ai-search"></i>
+                        </span>
+                        <input
+                            type="search"
+                            className="form-control"
+                            value={prompt}
+                            onChange={(e) => setPrompt(e.target.value)}
+                            placeholder="Search what you need or want to find nearby"
+                        />
+                        <button
+                            type="button"
+                            className="btn btn-primary rounded-pill"
+                            onClick={handleSearch}
+                            disabled={mutation.isLoading}
                         >
-                            <div className="card-body">
-                                <p>{card.type}</p>
-                                <h5 className="card-title">{card.title}</h5>
-                                <p className="card-text">{card.description}</p>
+                            Search
+                        </button>
+                    </div>
+
+                    {error && <p className="text-danger mt-2">{error}</p>} {/* Error message */}
+
+                    {cards.length > 0 ? (
+                        <div className="mt-4">
+                            {cards.map((card) => (
+                                <a
+                                    key={card.pathname}
+                                    className="card mb-3"
+                                    href={card.pathname}
+                                    target="_blank"
+                                    style={{ cursor: 'pointer' }}
+                                >
+                                    <div className="card-body">
+                                        <p>{card.type}</p>
+                                        <h5 className="card-title">{card.title}</h5>
+                                        <p className="card-text">{card.description}</p>
+                                    </div>
+                                </a>
+                            ))}
+                        </div>
+                    ) : (
+                        !error && (
+                            <div className="mt-4">
+                                <p className="text-muted">
+                                    No relevant results found for your search. Try refining your prompt or ask a different question.
+                                </p>
                             </div>
-                        </a>
-                    ))}
-                </div>
-            )}
+                        )
+                    )}
+                </Col>
+            </Row>
         </Container>
     );
 }
