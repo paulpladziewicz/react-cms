@@ -32,11 +32,45 @@ function useSearchCards() {
     return {mutation, getCachedResults};
 }
 
+function getCardTypeText(type) {
+    switch (type) {
+        case 'NEIGHBOR_SERVICES_PROFILE':
+            return 'NeighborServices™ Profile';
+        case 'BUSINESS':
+            return 'Business';
+        case 'EVENT':
+            return 'Event';
+        case 'ARTICLE':
+            return 'Article';
+        case 'GROUP':
+            return 'Group';
+        default:
+            return '';
+    }
+}
+
+function renderCardLink(type) {
+    switch (type) {
+        case 'NEIGHBOR_SERVICES_PROFILE':
+            return (<>View NeighborServices™ Profile<i className="ai-arrow-right ms-2"></i></>);
+        case 'BUSINESS':
+            return (<>View Business<i className="ai-arrow-right ms-2"></i></>);
+        case 'EVENT':
+            return (<>View Event<i className="ai-arrow-right ms-2"></i></>);
+        case 'ARTICLE':
+            return (<>View Article<i className="ai-arrow-right ms-2"></i></>);
+        case 'GROUP':
+            return (<>View Group<i className="ai-arrow-right ms-2"></i></>);
+        default:
+            return '';
+    }
+}
+
 function RouteComponent() {
     const [prompt, setPrompt] = useState('');
-    const [cards, setCards] = useState([]);
+    const [cards, setCards] = useState(null);
     const [cachedPrompt, setCachedPrompt] = useState('');
-    const [error, setError] = useState(''); // State to track error messages
+    const [error, setError] = useState('');
     const { mutation, getCachedResults } = useSearchCards();
 
     useEffect(() => {
@@ -59,11 +93,73 @@ function RouteComponent() {
                 onSuccess: (data) => {
                     setCards(data);
                     setCachedPrompt(prompt);
-                    setPrompt('');
                 },
             }
         );
     };
+
+    const handleClear = () => {
+        setPrompt('');
+        setError('');
+        setCachedPrompt('');
+        setCards(null);
+    }
+
+    const renderCards = () => {
+
+        if (mutation.isPending) {
+            return (
+                <div className="mt-4 text-center">
+                    <div className="spinner-border text-primary" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
+                    <p className="mt-2 text-muted">Fetching results, please wait...</p>
+                </div>
+            )
+        }
+
+        if (mutation.isError) {
+            return (
+                <p className="text-danger">An unexpected error occurred. Please try again soon.</p>
+            )
+        }
+
+        if (cards === null) {
+            return (
+                <p className="mb-4">Search results will display here.</p>
+            )
+        }
+
+        if (cards?.length > 0) {
+            return (
+                <>
+                    {cards.map((card) => (
+                        <div className="card mt-4" key={card.pathname}>
+                            <div className="card-body">
+                                <p>{getCardTypeText(card.type)}</p>
+                                <h5 className="card-title">{card.title}</h5>
+                                <p className="card-text">{card.description.length > 120 ? `${card.description.substring(0, 180)}...` : card.description}</p>
+                                <a
+                                    className="btn btn-link p-0"
+                                    href={card.pathname}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    {renderCardLink(card.type)}
+                                </a>
+                            </div>
+                        </div>
+                    ))}
+                </>
+            )
+        } else {
+            return (
+                <p>
+                    There is currently no relevant content available on the platform. Please try another search.
+                </p>
+            );
+        }
+    }
 
     return (
         <Container>
@@ -74,7 +170,7 @@ function RouteComponent() {
                         <p>Simply type any question or prompt—whether it’s a specific need, a task, or a curiosity—and we'll see what we can find for you.</p>
                     </div>
 
-                    <div className="input-group rounded-pill">
+                    <div className="input-group rounded-pill mb-4">
                         <span className="input-group-text">
                             <i className="ai-search"></i>
                         </span>
@@ -83,47 +179,23 @@ function RouteComponent() {
                             className="form-control"
                             value={prompt}
                             onChange={(e) => setPrompt(e.target.value)}
-                            placeholder="Search what you need or want to find nearby"
                         />
                         <button
                             type="button"
                             className="btn btn-primary rounded-pill"
                             onClick={handleSearch}
-                            disabled={mutation.isLoading}
+                            disabled={mutation.isPending}
                         >
                             Search
                         </button>
                     </div>
+                    <div className="mt-n2 text-end">
+                        <button className="btn btn-link p-0 mt-n4 me-4" onClick={handleClear}>Clear</button>
+                    </div>
 
-                    {error && <p className="text-danger mt-2">{error}</p>} {/* Error message */}
+                    {error && <p className="text-danger mt-n3">{error}</p>} {/* Error message */}
 
-                    {cards.length > 0 ? (
-                        <div className="mt-4">
-                            {cards.map((card) => (
-                                <a
-                                    key={card.pathname}
-                                    className="card mb-3"
-                                    href={card.pathname}
-                                    target="_blank"
-                                    style={{ cursor: 'pointer' }}
-                                >
-                                    <div className="card-body">
-                                        <p>{card.type}</p>
-                                        <h5 className="card-title">{card.title}</h5>
-                                        <p className="card-text">{card.description}</p>
-                                    </div>
-                                </a>
-                            ))}
-                        </div>
-                    ) : (
-                        !error && (
-                            <div className="mt-4">
-                                <p className="text-muted">
-                                    No relevant results found for your search. Try refining your prompt or ask a different question.
-                                </p>
-                            </div>
-                        )
-                    )}
+                    {renderCards()}
                 </Col>
             </Row>
         </Container>
