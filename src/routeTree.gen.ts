@@ -11,11 +11,19 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as IndexImport } from './routes/index'
 import { Route as SearchIndexImport } from './routes/search/index'
 import { Route as EventsIndexImport } from './routes/events/index'
 import { Route as EventSlugImport } from './routes/event/$slug'
+import { Route as CreateGroupIndexImport } from './routes/create/group/index'
 
 // Create/Update Routes
+
+const IndexRoute = IndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const SearchIndexRoute = SearchIndexImport.update({
   id: '/search/',
@@ -35,10 +43,23 @@ const EventSlugRoute = EventSlugImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const CreateGroupIndexRoute = CreateGroupIndexImport.update({
+  id: '/create/group/',
+  path: '/create/group/',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
     '/event/$slug': {
       id: '/event/$slug'
       path: '/event/$slug'
@@ -60,49 +81,72 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SearchIndexImport
       parentRoute: typeof rootRoute
     }
+    '/create/group/': {
+      id: '/create/group/'
+      path: '/create/group'
+      fullPath: '/create/group'
+      preLoaderRoute: typeof CreateGroupIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
   '/event/$slug': typeof EventSlugRoute
   '/events': typeof EventsIndexRoute
   '/search': typeof SearchIndexRoute
+  '/create/group': typeof CreateGroupIndexRoute
 }
 
 export interface FileRoutesByTo {
+  '/': typeof IndexRoute
   '/event/$slug': typeof EventSlugRoute
   '/events': typeof EventsIndexRoute
   '/search': typeof SearchIndexRoute
+  '/create/group': typeof CreateGroupIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
+  '/': typeof IndexRoute
   '/event/$slug': typeof EventSlugRoute
   '/events/': typeof EventsIndexRoute
   '/search/': typeof SearchIndexRoute
+  '/create/group/': typeof CreateGroupIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/event/$slug' | '/events' | '/search'
+  fullPaths: '/' | '/event/$slug' | '/events' | '/search' | '/create/group'
   fileRoutesByTo: FileRoutesByTo
-  to: '/event/$slug' | '/events' | '/search'
-  id: '__root__' | '/event/$slug' | '/events/' | '/search/'
+  to: '/' | '/event/$slug' | '/events' | '/search' | '/create/group'
+  id:
+    | '__root__'
+    | '/'
+    | '/event/$slug'
+    | '/events/'
+    | '/search/'
+    | '/create/group/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
   EventSlugRoute: typeof EventSlugRoute
   EventsIndexRoute: typeof EventsIndexRoute
   SearchIndexRoute: typeof SearchIndexRoute
+  CreateGroupIndexRoute: typeof CreateGroupIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
   EventSlugRoute: EventSlugRoute,
   EventsIndexRoute: EventsIndexRoute,
   SearchIndexRoute: SearchIndexRoute,
+  CreateGroupIndexRoute: CreateGroupIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -115,10 +159,15 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
+        "/",
         "/event/$slug",
         "/events/",
-        "/search/"
+        "/search/",
+        "/create/group/"
       ]
+    },
+    "/": {
+      "filePath": "index.tsx"
     },
     "/event/$slug": {
       "filePath": "event/$slug.tsx"
@@ -128,6 +177,9 @@ export const routeTree = rootRoute
     },
     "/search/": {
       "filePath": "search/index.tsx"
+    },
+    "/create/group/": {
+      "filePath": "create/group/index.tsx"
     }
   }
 }

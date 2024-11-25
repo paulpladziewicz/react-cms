@@ -19,11 +19,15 @@ function Navbar({ isAuthenticated }: NavbarProps) {
                 <BootstrapNavbar.Toggle aria-controls="navbarCollapse1" />
                 <BootstrapNavbar.Collapse id="navbarCollapse1">
                     <Nav className="me-auto">
-                        <Nav.Link href="/articles"><strong>Articles</strong></Nav.Link>
-                        <Nav.Link href="/groups"><strong>Groups</strong></Nav.Link>
-                        <Link className="nav-link" to="/events"><strong>Events</strong></Link>
-                        <Nav.Link href="/businesses"><strong>Businesses</strong></Nav.Link>
-                        <Nav.Link href="/neighbor-services"><strong>NeighborServices™</strong></Nav.Link>
+                        <Link className="nav-link fw-semibold" to="/search">
+                            <i className="ai-search fs-lg me-2"></i>Search
+                        </Link>
+                        <Link className="nav-link fw-semibold" to="/search">
+                            <i className="ai-map fs-lg me-2"></i>Explore
+                        </Link>
+                        <Link className="nav-link fw-semibold" to="/search">
+                            <i className="ai-circle-plus fs-lg me-2"></i>Create
+                        </Link>
                     </Nav>
                     {!isAuthenticated ? (
                         <>

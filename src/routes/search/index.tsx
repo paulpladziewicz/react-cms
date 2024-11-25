@@ -2,6 +2,8 @@ import {createFileRoute} from '@tanstack/react-router';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {Container, Row, Col} from "react-bootstrap";
 import {useEffect, useState} from "react";
+import VoiceVisualizer from "../../components/VoiceVisualizer.tsx";
+import ContentTypeButtonGroup from "../../components/ContentTypeButtonGroup.tsx";
 
 export const Route = createFileRoute('/search/')({
     component: RouteComponent,
@@ -125,9 +127,7 @@ function RouteComponent() {
         }
 
         if (cards === null) {
-            return (
-                <p className="mb-4">Search results will display here.</p>
-            )
+            return null;
         }
 
         if (cards?.length > 0) {
@@ -165,8 +165,10 @@ function RouteComponent() {
         <Container>
             <Row>
                 <Col lg={10} xl={8} className="mx-auto">
+                    <ContentTypeButtonGroup />
+
                     <div>
-                        <h1>AI-Enhanced Search</h1>
+                        <h1 className="mb-1 mt-3">Search</h1>
                         <p>Simply type any question or prompt—whether it’s a specific need, a task, or a curiosity—and we'll see what we can find for you.</p>
                     </div>
 
@@ -180,18 +182,24 @@ function RouteComponent() {
                             value={prompt}
                             onChange={(e) => setPrompt(e.target.value)}
                         />
-                        <button
-                            type="button"
-                            className="btn btn-primary rounded-pill"
-                            onClick={handleSearch}
-                            disabled={mutation.isPending}
-                        >
-                            Search
-                        </button>
+                        <div>
+                            {/*<button type="button" className="btn btn-secondary input-group-text me-2 py-2 px-2 bg-transparent border-0">*/}
+                            {/*    <i className="ai-microphone"></i>*/}
+                            {/*</button>*/}
+                            <button
+                                type="button"
+                                className="btn btn-primary rounded-pill"
+                                onClick={handleSearch}
+                                disabled={mutation.isPending}
+                            >
+                                Search
+                            </button>
+                        </div>
                     </div>
                     <div className="mt-n2 text-end">
                         <button className="btn btn-link p-0 mt-n4 me-4" onClick={handleClear}>Clear</button>
                     </div>
+
 
                     {error && <p className="text-danger mt-n3">{error}</p>} {/* Error message */}
 
