@@ -1,13 +1,7 @@
-import {createFileRoute} from '@tanstack/react-router';
-import {useMutation, useQueryClient} from '@tanstack/react-query';
-import {Container, Row, Col} from "react-bootstrap";
 import {useEffect, useState} from "react";
-import VoiceVisualizer from "../../components/VoiceVisualizer.tsx";
-import ContentTypeButtonGroup from "../../components/ContentTypeButtonGroup.tsx";
-
-export const Route = createFileRoute('/search/')({
-    component: RouteComponent,
-})
+import {Col, Container, Row} from "react-bootstrap";
+import ContentTypeButtonGroup from "./ContentTypeButtonGroup.tsx";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 
 function fetchCards(data) {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -68,7 +62,7 @@ function renderCardLink(type) {
     }
 }
 
-function RouteComponent() {
+function Search() {
     const [prompt, setPrompt] = useState('');
     const [cards, setCards] = useState(null);
     const [cachedPrompt, setCachedPrompt] = useState('');
@@ -165,8 +159,6 @@ function RouteComponent() {
         <Container>
             <Row>
                 <Col lg={10} xl={8} className="mx-auto">
-                    <ContentTypeButtonGroup />
-
                     <div>
                         <h1 className="mb-1 mt-3">Search</h1>
                         <p>Simply type any question or prompt—whether it’s a specific need, a task, or a curiosity—and we'll see what we can find for you.</p>
@@ -209,3 +201,5 @@ function RouteComponent() {
         </Container>
     );
 }
+
+export default Search;

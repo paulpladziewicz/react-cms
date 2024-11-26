@@ -11,29 +11,50 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as SearchImport } from './routes/search'
+import { Route as GroupsImport } from './routes/groups'
+import { Route as EventsImport } from './routes/events'
+import { Route as CreateImport } from './routes/create'
+import { Route as BusinessesImport } from './routes/businesses'
 import { Route as IndexImport } from './routes/index'
-import { Route as SearchIndexImport } from './routes/search/index'
-import { Route as EventsIndexImport } from './routes/events/index'
-import { Route as EventSlugImport } from './routes/event/$slug'
-import { Route as CreateGroupIndexImport } from './routes/create/group/index'
+import { Route as EventSlugImport } from './routes/event.$slug'
+import { Route as SomethingGroupIndexImport } from './routes/something/group/index'
 
 // Create/Update Routes
+
+const SearchRoute = SearchImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const GroupsRoute = GroupsImport.update({
+  id: '/groups',
+  path: '/groups',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const EventsRoute = EventsImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CreateRoute = CreateImport.update({
+  id: '/create',
+  path: '/create',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const BusinessesRoute = BusinessesImport.update({
+  id: '/businesses',
+  path: '/businesses',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const SearchIndexRoute = SearchIndexImport.update({
-  id: '/search/',
-  path: '/search/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const EventsIndexRoute = EventsIndexImport.update({
-  id: '/events/',
-  path: '/events/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -43,9 +64,9 @@ const EventSlugRoute = EventSlugImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const CreateGroupIndexRoute = CreateGroupIndexImport.update({
-  id: '/create/group/',
-  path: '/create/group/',
+const SomethingGroupIndexRoute = SomethingGroupIndexImport.update({
+  id: '/something/group/',
+  path: '/something/group/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -60,6 +81,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/businesses': {
+      id: '/businesses'
+      path: '/businesses'
+      fullPath: '/businesses'
+      preLoaderRoute: typeof BusinessesImport
+      parentRoute: typeof rootRoute
+    }
+    '/create': {
+      id: '/create'
+      path: '/create'
+      fullPath: '/create'
+      preLoaderRoute: typeof CreateImport
+      parentRoute: typeof rootRoute
+    }
+    '/events': {
+      id: '/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof EventsImport
+      parentRoute: typeof rootRoute
+    }
+    '/groups': {
+      id: '/groups'
+      path: '/groups'
+      fullPath: '/groups'
+      preLoaderRoute: typeof GroupsImport
+      parentRoute: typeof rootRoute
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchImport
+      parentRoute: typeof rootRoute
+    }
     '/event/$slug': {
       id: '/event/$slug'
       path: '/event/$slug'
@@ -67,25 +123,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventSlugImport
       parentRoute: typeof rootRoute
     }
-    '/events/': {
-      id: '/events/'
-      path: '/events'
-      fullPath: '/events'
-      preLoaderRoute: typeof EventsIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/search/': {
-      id: '/search/'
-      path: '/search'
-      fullPath: '/search'
-      preLoaderRoute: typeof SearchIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/create/group/': {
-      id: '/create/group/'
-      path: '/create/group'
-      fullPath: '/create/group'
-      preLoaderRoute: typeof CreateGroupIndexImport
+    '/something/group/': {
+      id: '/something/group/'
+      path: '/something/group'
+      fullPath: '/something/group'
+      preLoaderRoute: typeof SomethingGroupIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -95,58 +137,92 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/businesses': typeof BusinessesRoute
+  '/create': typeof CreateRoute
+  '/events': typeof EventsRoute
+  '/groups': typeof GroupsRoute
+  '/search': typeof SearchRoute
   '/event/$slug': typeof EventSlugRoute
-  '/events': typeof EventsIndexRoute
-  '/search': typeof SearchIndexRoute
-  '/create/group': typeof CreateGroupIndexRoute
+  '/something/group': typeof SomethingGroupIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/businesses': typeof BusinessesRoute
+  '/create': typeof CreateRoute
+  '/events': typeof EventsRoute
+  '/groups': typeof GroupsRoute
+  '/search': typeof SearchRoute
   '/event/$slug': typeof EventSlugRoute
-  '/events': typeof EventsIndexRoute
-  '/search': typeof SearchIndexRoute
-  '/create/group': typeof CreateGroupIndexRoute
+  '/something/group': typeof SomethingGroupIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/businesses': typeof BusinessesRoute
+  '/create': typeof CreateRoute
+  '/events': typeof EventsRoute
+  '/groups': typeof GroupsRoute
+  '/search': typeof SearchRoute
   '/event/$slug': typeof EventSlugRoute
-  '/events/': typeof EventsIndexRoute
-  '/search/': typeof SearchIndexRoute
-  '/create/group/': typeof CreateGroupIndexRoute
+  '/something/group/': typeof SomethingGroupIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/event/$slug' | '/events' | '/search' | '/create/group'
+  fullPaths:
+    | '/'
+    | '/businesses'
+    | '/create'
+    | '/events'
+    | '/groups'
+    | '/search'
+    | '/event/$slug'
+    | '/something/group'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/event/$slug' | '/events' | '/search' | '/create/group'
+  to:
+    | '/'
+    | '/businesses'
+    | '/create'
+    | '/events'
+    | '/groups'
+    | '/search'
+    | '/event/$slug'
+    | '/something/group'
   id:
     | '__root__'
     | '/'
+    | '/businesses'
+    | '/create'
+    | '/events'
+    | '/groups'
+    | '/search'
     | '/event/$slug'
-    | '/events/'
-    | '/search/'
-    | '/create/group/'
+    | '/something/group/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BusinessesRoute: typeof BusinessesRoute
+  CreateRoute: typeof CreateRoute
+  EventsRoute: typeof EventsRoute
+  GroupsRoute: typeof GroupsRoute
+  SearchRoute: typeof SearchRoute
   EventSlugRoute: typeof EventSlugRoute
-  EventsIndexRoute: typeof EventsIndexRoute
-  SearchIndexRoute: typeof SearchIndexRoute
-  CreateGroupIndexRoute: typeof CreateGroupIndexRoute
+  SomethingGroupIndexRoute: typeof SomethingGroupIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BusinessesRoute: BusinessesRoute,
+  CreateRoute: CreateRoute,
+  EventsRoute: EventsRoute,
+  GroupsRoute: GroupsRoute,
+  SearchRoute: SearchRoute,
   EventSlugRoute: EventSlugRoute,
-  EventsIndexRoute: EventsIndexRoute,
-  SearchIndexRoute: SearchIndexRoute,
-  CreateGroupIndexRoute: CreateGroupIndexRoute,
+  SomethingGroupIndexRoute: SomethingGroupIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -160,26 +236,38 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/businesses",
+        "/create",
+        "/events",
+        "/groups",
+        "/search",
         "/event/$slug",
-        "/events/",
-        "/search/",
-        "/create/group/"
+        "/something/group/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
+    "/businesses": {
+      "filePath": "businesses.tsx"
+    },
+    "/create": {
+      "filePath": "create.tsx"
+    },
+    "/events": {
+      "filePath": "events.tsx"
+    },
+    "/groups": {
+      "filePath": "groups.tsx"
+    },
+    "/search": {
+      "filePath": "search.tsx"
+    },
     "/event/$slug": {
-      "filePath": "event/$slug.tsx"
+      "filePath": "event.$slug.tsx"
     },
-    "/events/": {
-      "filePath": "events/index.tsx"
-    },
-    "/search/": {
-      "filePath": "search/index.tsx"
-    },
-    "/create/group/": {
-      "filePath": "create/group/index.tsx"
+    "/something/group/": {
+      "filePath": "something/group/index.tsx"
     }
   }
 }

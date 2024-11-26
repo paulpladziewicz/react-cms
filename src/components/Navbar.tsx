@@ -4,17 +4,17 @@ import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 import {Link} from "@tanstack/react-router";
 
-type NavbarProps = {
-    isAuthenticated: boolean;
-};
+function Navbar() {
+    const isAuthenticated = window.pageConfig?.userId
 
-function Navbar({ isAuthenticated }: NavbarProps) {
     return (
         <BootstrapNavbar expand="lg" bg="light" className="mb-4">
             <Container>
-                <BootstrapNavbar.Brand href="/" style={{ fontSize: '32px', fontWeight: 'bold' }}>
-                    Fremont
-                    <span style={{ color: 'rgba(var(--ar-primary-rgb), var(--ar-bg-opacity))' }}>MI</span>
+                <BootstrapNavbar.Brand style={{ fontSize: '32px', fontWeight: 'bold' }}>
+                    <Link to="/">
+                        Fremont
+                        <span style={{ color: 'rgba(var(--ar-primary-rgb), var(--ar-bg-opacity))' }}>MI</span>
+                    </Link>
                 </BootstrapNavbar.Brand>
                 <BootstrapNavbar.Toggle aria-controls="navbarCollapse1" />
                 <BootstrapNavbar.Collapse id="navbarCollapse1">
@@ -22,10 +22,10 @@ function Navbar({ isAuthenticated }: NavbarProps) {
                         <Link className="nav-link fw-semibold" to="/search">
                             <i className="ai-search fs-lg me-2"></i>Search
                         </Link>
-                        <Link className="nav-link fw-semibold" to="/search">
+                        <Link className="nav-link fw-semibold" to="/events">
                             <i className="ai-map fs-lg me-2"></i>Explore
                         </Link>
-                        <Link className="nav-link fw-semibold" to="/search">
+                        <Link className="nav-link fw-semibold" to="/create">
                             <i className="ai-circle-plus fs-lg me-2"></i>Create
                         </Link>
                     </Nav>
