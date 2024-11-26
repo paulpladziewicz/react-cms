@@ -8,7 +8,7 @@ export const Route = createFileRoute('/event/$slug')({
 
 function RouteComponent() {
     const {state} = useLocation() // Access event data passed through state
-    const event = state?.event
+    const event = state?.content
 
     useLayoutEffect(() => {
         window.scrollTo(0,0);
@@ -26,6 +26,16 @@ function RouteComponent() {
         <Container>
             <Row>
                 <Col lg={10} xl={8} className="mx-auto">
+
+                    <div className="text-end">
+                        <button type="button" className="btn btn-secondary btn-icon btn-sm me-2" aria-label="Edit">
+                            <i className="ai-edit-alt"></i>
+                        </button>
+                        <button type="button" className="btn btn-warning btn-icon btn-sm" aria-label="Report">
+                            <i className="ai-flag"></i>
+                        </button>
+                    </div>
+
                     <nav aria-label="breadcrumb">
                         <ol className="breadcrumb mb-2">
                             <li className="breadcrumb-item"><Link to="/events">Events</Link></li>

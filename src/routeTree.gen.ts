@@ -12,13 +12,17 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as SearchImport } from './routes/search'
+import { Route as NeighborServicesImport } from './routes/neighbor-services'
 import { Route as GroupsImport } from './routes/groups'
+import { Route as ExploreImport } from './routes/explore'
 import { Route as EventsImport } from './routes/events'
 import { Route as CreateImport } from './routes/create'
 import { Route as BusinessesImport } from './routes/businesses'
 import { Route as IndexImport } from './routes/index'
+import { Route as NeighborServicesProfileSlugImport } from './routes/neighbor-services-profile.$slug'
+import { Route as GroupSlugImport } from './routes/group.$slug'
 import { Route as EventSlugImport } from './routes/event.$slug'
-import { Route as SomethingGroupIndexImport } from './routes/something/group/index'
+import { Route as BusinessSlugImport } from './routes/business.$slug'
 
 // Create/Update Routes
 
@@ -28,9 +32,21 @@ const SearchRoute = SearchImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const NeighborServicesRoute = NeighborServicesImport.update({
+  id: '/neighbor-services',
+  path: '/neighbor-services',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const GroupsRoute = GroupsImport.update({
   id: '/groups',
   path: '/groups',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ExploreRoute = ExploreImport.update({
+  id: '/explore',
+  path: '/explore',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -58,15 +74,28 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const NeighborServicesProfileSlugRoute =
+  NeighborServicesProfileSlugImport.update({
+    id: '/neighbor-services-profile/$slug',
+    path: '/neighbor-services-profile/$slug',
+    getParentRoute: () => rootRoute,
+  } as any)
+
+const GroupSlugRoute = GroupSlugImport.update({
+  id: '/group/$slug',
+  path: '/group/$slug',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const EventSlugRoute = EventSlugImport.update({
   id: '/event/$slug',
   path: '/event/$slug',
   getParentRoute: () => rootRoute,
 } as any)
 
-const SomethingGroupIndexRoute = SomethingGroupIndexImport.update({
-  id: '/something/group/',
-  path: '/something/group/',
+const BusinessSlugRoute = BusinessSlugImport.update({
+  id: '/business/$slug',
+  path: '/business/$slug',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -102,11 +131,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsImport
       parentRoute: typeof rootRoute
     }
+    '/explore': {
+      id: '/explore'
+      path: '/explore'
+      fullPath: '/explore'
+      preLoaderRoute: typeof ExploreImport
+      parentRoute: typeof rootRoute
+    }
     '/groups': {
       id: '/groups'
       path: '/groups'
       fullPath: '/groups'
       preLoaderRoute: typeof GroupsImport
+      parentRoute: typeof rootRoute
+    }
+    '/neighbor-services': {
+      id: '/neighbor-services'
+      path: '/neighbor-services'
+      fullPath: '/neighbor-services'
+      preLoaderRoute: typeof NeighborServicesImport
       parentRoute: typeof rootRoute
     }
     '/search': {
@@ -116,6 +159,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SearchImport
       parentRoute: typeof rootRoute
     }
+    '/business/$slug': {
+      id: '/business/$slug'
+      path: '/business/$slug'
+      fullPath: '/business/$slug'
+      preLoaderRoute: typeof BusinessSlugImport
+      parentRoute: typeof rootRoute
+    }
     '/event/$slug': {
       id: '/event/$slug'
       path: '/event/$slug'
@@ -123,11 +173,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventSlugImport
       parentRoute: typeof rootRoute
     }
-    '/something/group/': {
-      id: '/something/group/'
-      path: '/something/group'
-      fullPath: '/something/group'
-      preLoaderRoute: typeof SomethingGroupIndexImport
+    '/group/$slug': {
+      id: '/group/$slug'
+      path: '/group/$slug'
+      fullPath: '/group/$slug'
+      preLoaderRoute: typeof GroupSlugImport
+      parentRoute: typeof rootRoute
+    }
+    '/neighbor-services-profile/$slug': {
+      id: '/neighbor-services-profile/$slug'
+      path: '/neighbor-services-profile/$slug'
+      fullPath: '/neighbor-services-profile/$slug'
+      preLoaderRoute: typeof NeighborServicesProfileSlugImport
       parentRoute: typeof rootRoute
     }
   }
@@ -140,10 +197,14 @@ export interface FileRoutesByFullPath {
   '/businesses': typeof BusinessesRoute
   '/create': typeof CreateRoute
   '/events': typeof EventsRoute
+  '/explore': typeof ExploreRoute
   '/groups': typeof GroupsRoute
+  '/neighbor-services': typeof NeighborServicesRoute
   '/search': typeof SearchRoute
+  '/business/$slug': typeof BusinessSlugRoute
   '/event/$slug': typeof EventSlugRoute
-  '/something/group': typeof SomethingGroupIndexRoute
+  '/group/$slug': typeof GroupSlugRoute
+  '/neighbor-services-profile/$slug': typeof NeighborServicesProfileSlugRoute
 }
 
 export interface FileRoutesByTo {
@@ -151,10 +212,14 @@ export interface FileRoutesByTo {
   '/businesses': typeof BusinessesRoute
   '/create': typeof CreateRoute
   '/events': typeof EventsRoute
+  '/explore': typeof ExploreRoute
   '/groups': typeof GroupsRoute
+  '/neighbor-services': typeof NeighborServicesRoute
   '/search': typeof SearchRoute
+  '/business/$slug': typeof BusinessSlugRoute
   '/event/$slug': typeof EventSlugRoute
-  '/something/group': typeof SomethingGroupIndexRoute
+  '/group/$slug': typeof GroupSlugRoute
+  '/neighbor-services-profile/$slug': typeof NeighborServicesProfileSlugRoute
 }
 
 export interface FileRoutesById {
@@ -163,10 +228,14 @@ export interface FileRoutesById {
   '/businesses': typeof BusinessesRoute
   '/create': typeof CreateRoute
   '/events': typeof EventsRoute
+  '/explore': typeof ExploreRoute
   '/groups': typeof GroupsRoute
+  '/neighbor-services': typeof NeighborServicesRoute
   '/search': typeof SearchRoute
+  '/business/$slug': typeof BusinessSlugRoute
   '/event/$slug': typeof EventSlugRoute
-  '/something/group/': typeof SomethingGroupIndexRoute
+  '/group/$slug': typeof GroupSlugRoute
+  '/neighbor-services-profile/$slug': typeof NeighborServicesProfileSlugRoute
 }
 
 export interface FileRouteTypes {
@@ -176,30 +245,42 @@ export interface FileRouteTypes {
     | '/businesses'
     | '/create'
     | '/events'
+    | '/explore'
     | '/groups'
+    | '/neighbor-services'
     | '/search'
+    | '/business/$slug'
     | '/event/$slug'
-    | '/something/group'
+    | '/group/$slug'
+    | '/neighbor-services-profile/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/businesses'
     | '/create'
     | '/events'
+    | '/explore'
     | '/groups'
+    | '/neighbor-services'
     | '/search'
+    | '/business/$slug'
     | '/event/$slug'
-    | '/something/group'
+    | '/group/$slug'
+    | '/neighbor-services-profile/$slug'
   id:
     | '__root__'
     | '/'
     | '/businesses'
     | '/create'
     | '/events'
+    | '/explore'
     | '/groups'
+    | '/neighbor-services'
     | '/search'
+    | '/business/$slug'
     | '/event/$slug'
-    | '/something/group/'
+    | '/group/$slug'
+    | '/neighbor-services-profile/$slug'
   fileRoutesById: FileRoutesById
 }
 
@@ -208,10 +289,14 @@ export interface RootRouteChildren {
   BusinessesRoute: typeof BusinessesRoute
   CreateRoute: typeof CreateRoute
   EventsRoute: typeof EventsRoute
+  ExploreRoute: typeof ExploreRoute
   GroupsRoute: typeof GroupsRoute
+  NeighborServicesRoute: typeof NeighborServicesRoute
   SearchRoute: typeof SearchRoute
+  BusinessSlugRoute: typeof BusinessSlugRoute
   EventSlugRoute: typeof EventSlugRoute
-  SomethingGroupIndexRoute: typeof SomethingGroupIndexRoute
+  GroupSlugRoute: typeof GroupSlugRoute
+  NeighborServicesProfileSlugRoute: typeof NeighborServicesProfileSlugRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -219,10 +304,14 @@ const rootRouteChildren: RootRouteChildren = {
   BusinessesRoute: BusinessesRoute,
   CreateRoute: CreateRoute,
   EventsRoute: EventsRoute,
+  ExploreRoute: ExploreRoute,
   GroupsRoute: GroupsRoute,
+  NeighborServicesRoute: NeighborServicesRoute,
   SearchRoute: SearchRoute,
+  BusinessSlugRoute: BusinessSlugRoute,
   EventSlugRoute: EventSlugRoute,
-  SomethingGroupIndexRoute: SomethingGroupIndexRoute,
+  GroupSlugRoute: GroupSlugRoute,
+  NeighborServicesProfileSlugRoute: NeighborServicesProfileSlugRoute,
 }
 
 export const routeTree = rootRoute
@@ -239,10 +328,14 @@ export const routeTree = rootRoute
         "/businesses",
         "/create",
         "/events",
+        "/explore",
         "/groups",
+        "/neighbor-services",
         "/search",
+        "/business/$slug",
         "/event/$slug",
-        "/something/group/"
+        "/group/$slug",
+        "/neighbor-services-profile/$slug"
       ]
     },
     "/": {
@@ -257,17 +350,29 @@ export const routeTree = rootRoute
     "/events": {
       "filePath": "events.tsx"
     },
+    "/explore": {
+      "filePath": "explore.tsx"
+    },
     "/groups": {
       "filePath": "groups.tsx"
+    },
+    "/neighbor-services": {
+      "filePath": "neighbor-services.tsx"
     },
     "/search": {
       "filePath": "search.tsx"
     },
+    "/business/$slug": {
+      "filePath": "business.$slug.tsx"
+    },
     "/event/$slug": {
       "filePath": "event.$slug.tsx"
     },
-    "/something/group/": {
-      "filePath": "something/group/index.tsx"
+    "/group/$slug": {
+      "filePath": "group.$slug.tsx"
+    },
+    "/neighbor-services-profile/$slug": {
+      "filePath": "neighbor-services-profile.$slug.tsx"
     }
   }
 }

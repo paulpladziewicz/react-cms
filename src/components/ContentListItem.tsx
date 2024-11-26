@@ -10,7 +10,12 @@ function ContentListItem({content}) {
                 <article className="row g-0 border-0">
                     <div className="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
                         <h3>
-                            <Link to={pathname}>{title}</Link>
+                            <Link
+                                to={pathname}
+                                state={{ content }}
+                            >
+                                {title}
+                            </Link>
                         </h3>
                         <p className="mb-2">{description}</p>
                         <div className="d-flex flex-wrap align-items-center mt-n2">
@@ -25,7 +30,12 @@ function ContentListItem({content}) {
                 <article className="row g-0 border-0">
                     <div className="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
                         <h3>
-                            <Link to={pathname}>{title}</Link>
+                            <Link
+                                to={pathname}
+                                state={{content}}
+                            >
+                                {title}
+                            </Link>
                         </h3>
                         <p className="mb-2">{headline}</p>
                         <p className="mb-2">{description}</p>
@@ -41,7 +51,12 @@ function ContentListItem({content}) {
                 <article className="row g-0 border-0">
                     <div className="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
                         <h3>
-                            <a href="/events/kdkfas">{title}</a>
+                            <Link
+                                to={pathname}
+                                state={{content}}
+                            >
+                                {title}
+                            </Link>
                         </h3>
                         <p className="mb-2">{description}</p>
                         <div className="d-flex flex-wrap align-items-center mt-n2">
