@@ -1,5 +1,5 @@
 import {createFileRoute} from '@tanstack/react-router'
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import contentTypes from "../constants/ContentTypes.ts";
 
 export const Route = createFileRoute('/create')({
@@ -23,6 +23,33 @@ function RouteComponent() {
     const removeImage = (index: number) => {
         setImages(images.filter((_, i) => i !== index));
     };
+
+    useEffect(() => {
+        const handlePaste = (event: ClipboardEvent) => {
+            const items = event.clipboardData?.items || [];
+            const pastedImages: File[] = [];
+
+            for (const item of items) {
+                if (item.type.startsWith('image/')) {
+                    const file = item.getAsFile();
+                    if (file) {
+                        pastedImages.push(file);
+                    }
+                }
+            }
+
+            if (pastedImages.length > 0) {
+                event.preventDefault(); // Prevent default paste behavior for images
+                setImages((prevImages) => [...prevImages, ...pastedImages]);
+            }
+        };
+
+        document.addEventListener('paste', handlePaste);
+
+        return () => {
+            document.removeEventListener('paste', handlePaste);
+        };
+    }, []);
 
     const renderDetailOverview = (contentType) => {
         switch (contentType) {

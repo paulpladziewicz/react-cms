@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {createFileRoute} from '@tanstack/react-router'
+import {createFileRoute, Link} from '@tanstack/react-router'
 import ContentTypeButtonGroup from "../components/ContentTypeButtonGroup.tsx";
 
 export const Route = createFileRoute('/')({
@@ -44,14 +44,18 @@ function RouteComponent() {
                                     fill-opacity="0.1"></path>
                             </svg>
                         </div>
-                        <h3 className="h4 pb-2 mb-1">Explore & Find Local</h3>
-                        <p className="mb-0">Find things nearby without distractions. Even ads support businesses or
-                            individuals in the community.</p>
+                        <h3 className="h4 pb-2 mb-1">Search Local</h3>
+                        <p className="mb-0">Don't worry about keywords. Simply describe what you're looking for, and
+                            we'll show you relevant content on the platform.</p>
+                        <Link className="btn btn-lg btn-link p-0 mt-3" href="/search">
+                            Search
+                            <i className="ai-arrow-right ms-2"></i>
+                        </Link>
                     </div>
 
                     <div className="col text-center mx-auto" style={{maxWidth: '450px'}}>
                         <div className="ratio ratio-1x1 position-relative mx-auto mb-3 mb-sm-4" style={{width: '68px'}}>
-                            <i className="ai-map text-primary fs-1 d-flex align-items-center justify-content-center position-absolute start-0"></i>
+                        <i className="ai-map text-primary fs-1 d-flex align-items-center justify-content-center position-absolute start-0"></i>
                             <svg className="position-absolute top-0 start-0 text-primary" width="68" height="68"
                                  viewBox="0 0 68 68" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -59,9 +63,12 @@ function RouteComponent() {
                                     fill-opacity="0.1"></path>
                             </svg>
                         </div>
-                        <h3 className="h4 pb-2 mb-1">Easily Create</h3>
-                        <p className="mb-0">Register to create your own groups, events, businesses, or NeighborServices™
-                            profile.</p>
+                        <h3 className="h4 pb-2 mb-1">Explore</h3>
+                        <p className="mb-0">When you're looking to learn more about what the community has to offer in general, we'll ask you questions to help you follow your curiosity finding things.</p>
+                        <Link className="btn btn-lg btn-link p-0 mt-3" href="/explore">
+                            Explore
+                            <i className="ai-arrow-right ms-2"></i>
+                        </Link>
                     </div>
 
                     <div className="col text-center mx-auto" style={{maxWidth: '450px'}}>
@@ -74,9 +81,12 @@ function RouteComponent() {
                                     fill-opacity="0.1"></path>
                             </svg>
                         </div>
-                        <h3 className="h4 pb-2 mb-1">No Privacy Concerns</h3>
-                        <p className="mb-0">We don’t track identifiable user behavior or share personal data. Fully
-                            compliant with many privacy regulations like GDPR, CCPA, and PECR.</p>
+                        <h3 className="h4 pb-2 mb-1">Create Listings</h3>
+                        <p className="mb-0">Select what type of listing you'd like to create, and provide the information without complex forms.</p>
+                        <Link className="btn btn-lg btn-link p-0 mt-3" href="/create">
+                            Create
+                            <i className="ai-arrow-right ms-2"></i>
+                        </Link>
                     </div>
                 </div>
             </div>
