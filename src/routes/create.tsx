@@ -100,9 +100,7 @@ function RouteComponent() {
             <div className="row">
                 <div className="col-md-10 col-lg-8 mx-auto">
                     <h1>Create Listing</h1>
-                    <p>Select what type of listing you'd like to create and enter the information in plain English. We
-                        avoid complex
-                        forms.</p>
+                    <p>We avoid complex forms. Please provide the text and images, and we'll make sure the listing displays well.</p>
                     {/*<p>We'll review and make sure the listing is created accurately within 24 hours or we'll reach*/}
                     {/*    out for more*/}
                     {/*    information.</p>*/}
@@ -127,24 +125,11 @@ function RouteComponent() {
                         ))}
                     </div>
 
-                    <div className="row">
-                        <div className="col-md-6">
-                            <div className="form-group mb-3">
-                                <label htmlFor="email" className="mb-1 form-label">Email</label>
-                                <input type="email" className="form-control" id="email"
-                                       placeholder="Enter email address" required/>
-                                <div className="form-text">You're currently not logged in. Please provide your email
-                                    address in case we need more information.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     {renderDetailOverview(contentType)}
 
                     <form action="">
                         <div className="form-group mb-3">
-                            <label htmlFor="detail" className="mb-1 form-label">Details</label>
+                            <label htmlFor="detail" className="mb-1 form-label">Details (required)</label>
                             <textarea className="form-control" id="detail" rows="7"
                                       placeholder="Provide as much detail as you can here" required></textarea>
                             <div className="form-text">Don't worry about formatting. We'll make sure the listing
@@ -153,7 +138,7 @@ function RouteComponent() {
 
                         </div>
                         <div className="form-group mb-3">
-                            <label className="mb-1 form-label">Add Images</label>
+                            <label className="mb-1 form-label">Add Images (optional)</label>
                             <input
                                 type="file"
                                 className="form-control"

@@ -161,7 +161,7 @@ function Search() {
                 <Col lg={10} xl={8} className="mx-auto">
                     <div>
                         <h1 className="mb-1">Search</h1>
-                        <p>Simply type any question or prompt—whether it’s a specific need, a task, or a curiosity—and we'll see what we can find for you.</p>
+                        <p>Simply enter keywords, a question, or a prompt, and we'll see what we can find for you.</p>
                     </div>
 
                     <div className="input-group rounded-pill mb-4">

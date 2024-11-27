@@ -11,6 +11,7 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as UpdateImport } from './routes/update'
 import { Route as SearchImport } from './routes/search'
 import { Route as NeighborServicesImport } from './routes/neighbor-services'
 import { Route as GroupsImport } from './routes/groups'
@@ -25,6 +26,12 @@ import { Route as EventSlugImport } from './routes/event.$slug'
 import { Route as BusinessSlugImport } from './routes/business.$slug'
 
 // Create/Update Routes
+
+const UpdateRoute = UpdateImport.update({
+  id: '/update',
+  path: '/update',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const SearchRoute = SearchImport.update({
   id: '/search',
@@ -159,6 +166,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SearchImport
       parentRoute: typeof rootRoute
     }
+    '/update': {
+      id: '/update'
+      path: '/update'
+      fullPath: '/update'
+      preLoaderRoute: typeof UpdateImport
+      parentRoute: typeof rootRoute
+    }
     '/business/$slug': {
       id: '/business/$slug'
       path: '/business/$slug'
@@ -201,6 +215,7 @@ export interface FileRoutesByFullPath {
   '/groups': typeof GroupsRoute
   '/neighbor-services': typeof NeighborServicesRoute
   '/search': typeof SearchRoute
+  '/update': typeof UpdateRoute
   '/business/$slug': typeof BusinessSlugRoute
   '/event/$slug': typeof EventSlugRoute
   '/group/$slug': typeof GroupSlugRoute
@@ -216,6 +231,7 @@ export interface FileRoutesByTo {
   '/groups': typeof GroupsRoute
   '/neighbor-services': typeof NeighborServicesRoute
   '/search': typeof SearchRoute
+  '/update': typeof UpdateRoute
   '/business/$slug': typeof BusinessSlugRoute
   '/event/$slug': typeof EventSlugRoute
   '/group/$slug': typeof GroupSlugRoute
@@ -232,6 +248,7 @@ export interface FileRoutesById {
   '/groups': typeof GroupsRoute
   '/neighbor-services': typeof NeighborServicesRoute
   '/search': typeof SearchRoute
+  '/update': typeof UpdateRoute
   '/business/$slug': typeof BusinessSlugRoute
   '/event/$slug': typeof EventSlugRoute
   '/group/$slug': typeof GroupSlugRoute
@@ -249,6 +266,7 @@ export interface FileRouteTypes {
     | '/groups'
     | '/neighbor-services'
     | '/search'
+    | '/update'
     | '/business/$slug'
     | '/event/$slug'
     | '/group/$slug'
@@ -263,6 +281,7 @@ export interface FileRouteTypes {
     | '/groups'
     | '/neighbor-services'
     | '/search'
+    | '/update'
     | '/business/$slug'
     | '/event/$slug'
     | '/group/$slug'
@@ -277,6 +296,7 @@ export interface FileRouteTypes {
     | '/groups'
     | '/neighbor-services'
     | '/search'
+    | '/update'
     | '/business/$slug'
     | '/event/$slug'
     | '/group/$slug'
@@ -293,6 +313,7 @@ export interface RootRouteChildren {
   GroupsRoute: typeof GroupsRoute
   NeighborServicesRoute: typeof NeighborServicesRoute
   SearchRoute: typeof SearchRoute
+  UpdateRoute: typeof UpdateRoute
   BusinessSlugRoute: typeof BusinessSlugRoute
   EventSlugRoute: typeof EventSlugRoute
   GroupSlugRoute: typeof GroupSlugRoute
@@ -308,6 +329,7 @@ const rootRouteChildren: RootRouteChildren = {
   GroupsRoute: GroupsRoute,
   NeighborServicesRoute: NeighborServicesRoute,
   SearchRoute: SearchRoute,
+  UpdateRoute: UpdateRoute,
   BusinessSlugRoute: BusinessSlugRoute,
   EventSlugRoute: EventSlugRoute,
   GroupSlugRoute: GroupSlugRoute,
@@ -332,6 +354,7 @@ export const routeTree = rootRoute
         "/groups",
         "/neighbor-services",
         "/search",
+        "/update",
         "/business/$slug",
         "/event/$slug",
         "/group/$slug",
@@ -361,6 +384,9 @@ export const routeTree = rootRoute
     },
     "/search": {
       "filePath": "search.tsx"
+    },
+    "/update": {
+      "filePath": "update.tsx"
     },
     "/business/$slug": {
       "filePath": "business.$slug.tsx"
