@@ -35,20 +35,22 @@ function RouteComponent() {
                         </nav>
 
                         {!profileImageUrl ? null : (
-                            <div
-                                className="d-flex flex-column justify-content-end position-relative overflow-hidden rounded-circle bg-size-cover bg-position-center flex-shrink-0"
-                                style={{
-                                    width: '200px',
-                                    height: '200px',
-                                    backgroundImage: `url(${profileImageUrl})`,
-                                }}
-                            ></div>
+                            <div className="d-flex justify-content-center">
+                                <div
+                                    className="rounded-circle bg-size-cover bg-position-center"
+                                    style={{
+                                        width: '200px',
+                                        height: '200px',
+                                        backgroundImage: `url(${profileImageUrl})`,
+                                    }}
+                                ></div>
+                            </div>
                         )}
 
                         <h1 className="display-4 mb-3 text-center">{title}</h1>
                         <p
                             className="fs-xl mb-3"
-                            dangerouslySetInnerHTML={{ __html: description }}
+                            dangerouslySetInnerHTML={{__html: description}}
                         />
 
                         {tags?.length > 0 && (

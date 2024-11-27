@@ -1,6 +1,8 @@
 import * as React from 'react'
 import {createFileRoute, Link} from '@tanstack/react-router'
 import ContentTypeButtonGroup from "../components/ContentTypeButtonGroup.tsx";
+import FAQAccordion from "../components/FAQAccordian.tsx";
+import ContactForm from "../components/ContactForm.tsx";
 
 export const Route = createFileRoute('/')({
     component: RouteComponent,
@@ -135,162 +137,12 @@ function RouteComponent() {
                             <div className="ps-md-3 ps-lg-4 ps-xl-5">
                                 <h2 className="h1 pb-sm-1 pb-md-3">Common Questions &amp; Answers</h2>
 
-                                <div className="accordion pe-md-5" id="faq">
-                                    <div className="accordion-item bg-transparent mb-n1 mb-xl-1">
-                                        <h3 className="accordion-header">
-                                            <button className="accordion-button fs-6 py-3 px-0" type="button"
-                                                    data-bs-toggle="collapse" data-bs-target="#groups-create"
-                                                    aria-expanded="true" aria-controls="groups-create">
-                                                <span className="pe-3">What measures are in place to maintain a safe and welcoming community environment?</span>
-                                            </button>
-                                        </h3>
-                                        <div className="accordion-collapse collapse show" id="groups-create"
-                                             data-bs-parent="#faq">
-                                            <div className="accordion-body fs-sm">
-                                                <p>We prioritize creating a safe and welcoming environment by regularly
-                                                    reviewing content to ensure it aligns with our community standards.
-                                                    Our
-                                                    platform is designed to foster connection and collaboration,
-                                                    focusing on
-                                                    bringing people together rather than just the individual, reducing
-                                                    the
-                                                    likelihood of offensive interactions. Additionally, all members must
-                                                    be 18
-                                                    years or older to register.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="accordion-item bg-transparent mb-n1 mb-xl-1">
-                                        <h3 className="accordion-header">
-                                            <button className="accordion-button fs-6 py-3 px-0 collapsed" type="button"
-                                                    data-bs-toggle="collapse" data-bs-target="#groups-announcements"
-                                                    aria-expanded="false" aria-controls="groups-announcements">
-                                                <span className="pe-3">How is my personal information protected on this platform? Can I delete my account and data if I no longer wish to use the platform?</span>
-                                            </button>
-                                        </h3>
-                                        <div className="accordion-collapse collapse" id="groups-announcements"
-                                             data-bs-parent="#faq">
-                                            <div className="accordion-body fs-sm">
-                                                <p>We take your privacy seriously and implement robust security measures
-                                                    to
-                                                    protect your personal information. We do not share any data with
-                                                    third
-                                                    parties. If you decide to delete your account or the content you've
-                                                    created
-                                                    on the platform, rest assured that it will be permanently removed
-                                                    from our
-                                                    system without retention.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="accordion-item bg-transparent mb-n1 mb-xl-1">
-                                        <h3 className="accordion-header">
-                                            <button className="accordion-button fs-6 py-3 px-0 collapsed" type="button"
-                                                    data-bs-toggle="collapse" data-bs-target="#events-view"
-                                                    aria-expanded="false" aria-controls="events-view">
-                                                <span className="pe-3">How can I report inappropriate content or behavior?</span>
-                                            </button>
-                                        </h3>
-                                        <div className="accordion-collapse collapse" id="events-view"
-                                             data-bs-parent="#faq">
-                                            <div className="accordion-body fs-sm">
-                                                <p>You can easily report inappropriate content or behavior by using the
-                                                    contact
-                                                    form located right next to this section. Your concerns will be
-                                                    addressed
-                                                    promptly to ensure a safe and welcoming environment for
-                                                    everyone.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="accordion-item bg-transparent mb-n1 mb-xl-1">
-                                        <h3 className="accordion-header">
-                                            <button className="accordion-button fs-6 py-3 px-0 collapsed" type="button"
-                                                    data-bs-toggle="collapse" data-bs-target="#events-create"
-                                                    aria-expanded="false" aria-controls="events-create">
-                                                <span className="pe-3">What guidelines should I follow when creating content?</span>
-                                            </button>
-                                        </h3>
-                                        <div className="accordion-collapse collapse" id="events-create"
-                                             data-bs-parent="#faq">
-                                            <div className="accordion-body fs-sm">
-                                                <p>When creating content, we encourage respectful and positive
-                                                    interactions that
-                                                    contribute to a welcoming community. Please avoid any offensive,
-                                                    inappropriate, or harmful material, and ensure your content aligns
-                                                    with our
-                                                    platform's values. For detailed guidelines, refer to our Terms of
-                                                    Service,
-                                                    which outline the standards for appropriate behavior and content
-                                                    creation.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="accordion-item bg-transparent mb-n1 mb-xl-1">
-                                        <h3 className="accordion-header">
-                                            <button className="accordion-button fs-6 py-3 px-0 collapsed" type="button"
-                                                    data-bs-toggle="collapse" data-bs-target="#events-update"
-                                                    aria-expanded="false" aria-controls="events-update">
-                                                <span className="pe-3">How does the platform handle communication between users?</span>
-                                            </button>
-                                        </h3>
-                                        <div className="accordion-collapse collapse" id="events-update"
-                                             data-bs-parent="#faq">
-                                            <div className="accordion-body fs-sm">
-                                                <p>Currently, communication between users is primarily handled via
-                                                    email. This
-                                                    ensures that messages are direct and efficient, while still allowing
-                                                    users
-                                                    to connect based on the information available on the platform.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
+                                <FAQAccordion />
                             </div>
                         </div>
 
                         <div className="col-md-6">
-                            <h2 className="h1" id="contact-us">Contact us</h2>
-                            <p>We're here to help with any questions, suggestions, or feedback you might have. Whether
-                                you're
-                                looking for more information or need assistance with our platform, feel free to reach
-                                out.</p>
-
-                            <form className="row g-4 needs-validation" noValidate="" id="contactForm">
-                                <div className="col-sm-6">
-                                    <label className="form-label fs-base" htmlFor="name">Name</label>
-                                    <input className="form-control form-control-lg" type="text" placeholder="Your name"
-                                           required="" id="name"/>
-                                    <div className="invalid-feedback">Please enter your name!</div>
-                                </div>
-                                <div className="col-sm-6">
-                                    <label className="form-label fs-base" htmlFor="email">Email</label>
-                                    <input className="form-control form-control-lg" type="email"
-                                           placeholder="Email address" required="" id="email"/>
-                                    <div className="invalid-feedback">Please provide a valid email address!</div>
-                                </div>
-                                <div className="col-sm-12">
-                                    <label className="form-label fs-base" htmlFor="message">Message</label>
-                                    <textarea className="form-control form-control-lg" rows="5"
-                                              placeholder="Enter your message here..." required=""
-                                              id="message"></textarea>
-                                    <div className="invalid-feedback">Please enter your message!</div>
-                                </div>
-                                <div className="col-sm-12 pt-2">
-                                    <button id="submit-button" className="btn btn-lg btn-primary" type="button"
-                                            onClick="submitContactForm()">Send message
-                                    </button>
-                                    <button id="loading-button" className="btn btn-lg btn-primary pe-none" type="button"
-                                            style={{display: 'none'}}>
-                                        <span className="spinner-border spinner-border-sm me-2" role="status"
-                                              aria-hidden="true"></span>
-                                        Loading...
-                                    </button>
-                                </div>
-                                <div id="form-message" className="alert mt-4" style={{display: 'none'}}></div>
-                            </form>
-
+                            <ContactForm />
                         </div>
                     </div>
                 </div>
