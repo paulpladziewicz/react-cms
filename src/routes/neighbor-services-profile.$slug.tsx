@@ -1,51 +1,86 @@
-import * as React from 'react'
 import {createFileRoute, Link, useLocation} from '@tanstack/react-router'
 import {useLayoutEffect} from "react";
-import {Col, Container, Row} from "react-bootstrap";
 
 export const Route = createFileRoute('/neighbor-services-profile/$slug')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
-    const {state} = useLocation()
-    const content = state?.content
+    const { state } = useLocation();
+    const content = state?.content;
 
     useLayoutEffect(() => {
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
     }, []);
 
     if (!content) {
-        return <div>No event data available.</div>
+        return <div>No profile data available.</div>;
     }
 
-    const {detail} = content
-    const {title, description} = detail
+    const { detail, tags } = content;
+    const { title, description, profileImageUrl, neighborServices } = detail;
 
     return (
-        <Container>
-            <Row>
-                <Col lg={10} xl={8} className="mx-auto">
-                    <nav aria-label="breadcrumb">
-                        <ol className="breadcrumb mb-2">
-                            <li className="breadcrumb-item"><Link to="/events">Events</Link></li>
-                            <li className="breadcrumb-item active" aria-current="page">{title}</li>
-                        </ol>
-                    </nav>
+        <main>
+            <div className="container">
+                <div className="row">
+                    <div className="col-lg-8 mx-auto">
+                        <nav aria-label="breadcrumb">
+                            <ol className="breadcrumb mb-2">
+                                <li className="breadcrumb-item">
+                                    <Link to="/neighbor-services">NeighborServices™</Link>
+                                </li>
+                                <li className="breadcrumb-item active" aria-current="page">{title}</li>
+                            </ol>
+                        </nav>
 
-                    <section>
+                        {!profileImageUrl ? null : (
+                            <div
+                                className="d-flex flex-column justify-content-end position-relative overflow-hidden rounded-circle bg-size-cover bg-position-center flex-shrink-0"
+                                style={{
+                                    width: '200px',
+                                    height: '200px',
+                                    backgroundImage: `url(${profileImageUrl})`,
+                                }}
+                            ></div>
+                        )}
 
-                        <div className="d-flex justify-content-between align-items-center mb-2">
-                            <h1 className="display-4 mb-0">{title}</h1>
-                        </div>
-
+                        <h1 className="display-4 mb-3 text-center">{title}</h1>
                         <p
-                            className="fs-lg mt-2 mb-4"
-                            dangerouslySetInnerHTML={{__html: description}}
+                            className="fs-xl mb-3"
+                            dangerouslySetInnerHTML={{ __html: description }}
                         />
-                    </section>
-                </Col>
-            </Row>
-        </Container>
-    )
+
+                        {tags?.length > 0 && (
+                            <div className="d-flex flex-wrap">
+                                {tags.map((tag, index) => (
+                                    <span key={index} className="badge bg-secondary m-1">
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
+                        )}
+
+                        <div className="mt-4 mb-5">
+                            {neighborServices?.length > 0 ? (
+                                <ul className="list-unstyled">
+                                    {neighborServices.map((service, index) => (
+                                        <li key={index}>
+                                            <div className="d-flex align-items-center">
+                                                <h3 className="h3 w-75 pe-2 mb-2">{service.name}</h3>
+                                                <p className="h5 w-25 ps-2 text-center mb-2">{service.price}</p>
+                                            </div>
+                                            <p className="fs-xl">{service.description}</p>
+                                        </li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <p className="text-muted mb-3">No services available at this time.</p>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    );
 }

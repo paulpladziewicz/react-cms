@@ -28,7 +28,7 @@ function RouteComponent() {
                 <Col lg={10} xl={8} className="mx-auto">
                     <nav aria-label="breadcrumb">
                         <ol className="breadcrumb mb-2">
-                            <li className="breadcrumb-item"><Link to="/events">Events</Link></li>
+                            <li className="breadcrumb-item"><Link to="/groups">Groups</Link></li>
                             <li className="breadcrumb-item active" aria-current="page">{title}</li>
                         </ol>
                     </nav>
