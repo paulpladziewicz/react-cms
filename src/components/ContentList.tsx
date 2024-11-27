@@ -14,6 +14,21 @@ interface Props {
     contentType: string;
 }
 
+function getTitle(contentType: string) {
+    switch (contentType) {
+        case 'NEIGHBOR_SERVICES_PROFILE':
+            return 'NeighborServices™';
+        case 'BUSINESS':
+            return 'Businesses';
+        case 'EVENT':
+            return 'Events';
+        case 'GROUP':
+            return 'Groups';
+        default:
+            return '';
+    }
+}
+
 function ContentList({ contentType }) {
     const { data, isLoading, error } = useQuery({
         queryKey: [contentType],
@@ -50,19 +65,19 @@ function ContentList({ contentType }) {
     return (
         <Container>
             <Row>
-                <Col lg={10} className="mx-auto">
+                <Col lg={10} xl={8} className="mx-auto">
                     <nav aria-label="breadcrumb">
                         <ol className="breadcrumb mb-2">
                             <li className="breadcrumb-item">
                                 <a href="/">Home</a>
                             </li>
                             <li className="breadcrumb-item active" aria-current="page">
-                                Groups
+                                {getTitle(contentType)}
                             </li>
                         </ol>
                     </nav>
 
-                    <h1 className="display-4 mb-0">{contentType}</h1>
+                    <h1 className="display-4 mb-0">{getTitle(contentType)}</h1>
                     {renderContentListItems()}
 
                 </Col>

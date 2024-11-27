@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {Col, Container, Row} from "react-bootstrap";
 import ContentTypeButtonGroup from "./ContentTypeButtonGroup.tsx";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
+import getCardTypeText from "../utils/getCardTypeText.ts";
 
 function fetchCards(data) {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -26,23 +27,6 @@ function useSearchCards() {
     const getCachedResults = (prompt) => queryClient.getQueryData(['cards', {prompt}]);
 
     return {mutation, getCachedResults};
-}
-
-function getCardTypeText(type) {
-    switch (type) {
-        case 'NEIGHBOR_SERVICES_PROFILE':
-            return 'NeighborServices™ Profile';
-        case 'BUSINESS':
-            return 'Business';
-        case 'EVENT':
-            return 'Event';
-        case 'ARTICLE':
-            return 'Article';
-        case 'GROUP':
-            return 'Group';
-        default:
-            return '';
-    }
 }
 
 function renderCardLink(type) {

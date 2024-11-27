@@ -77,14 +77,7 @@ function RouteComponent() {
         switch (contentType) {
             case 'group':
                 return (
-                    <p>Please include the following details:
-                        <ul>
-                            <li>Title</li>
-                            <li>Description</li>
-                            <li>Common meeting location</li>
-                            <li>If the group is virtual, provide a link</li>
-                        </ul>
-                    </p>
+                    <p>Provide key details like the group's title, a brief description, where the group will meet, and a link if it's virtual.</p>
                 );
         }
     };
@@ -100,7 +93,7 @@ function RouteComponent() {
             <div className="row">
                 <div className="col-md-10 col-lg-8 mx-auto">
                     <h1>Create Listing</h1>
-                    <p>We avoid complex forms. Please provide the text and images, and we'll make sure the listing displays well.</p>
+                    <p>Share your text and images, and we'll make it look great. You can upload images you want to showcase visually or photos with additional details you'd like us to convert into text, such as product listings, service descriptions, or menus.</p>
                     {/*<p>We'll review and make sure the listing is created accurately within 24 hours or we'll reach*/}
                     {/*    out for more*/}
                     {/*    information.</p>*/}
