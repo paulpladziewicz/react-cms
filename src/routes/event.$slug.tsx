@@ -8,7 +8,7 @@ export const Route = createFileRoute('/event/$slug')({
 
 function RouteComponent() {
     const {state} = useLocation() // Access event data passed through state
-    const event = state?.content
+    const event = state?.event
 
     useLayoutEffect(() => {
         window.scrollTo(0,0);
