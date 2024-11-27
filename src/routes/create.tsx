@@ -106,9 +106,9 @@ function RouteComponent() {
                     {/*    information.</p>*/}
 
                     <h2>What type of listing would you like to create?</h2>
-                    <div className="d-flex mb-4">
+                    <div className="d-flex flex-wrap mb-4">
                         {contentTypes.map((type) => (
-                            <div className="me-3" key={type.id}>
+                            <div className="me-2 mb-2" key={type.id}>
                                 <input
                                     type="radio"
                                     className="btn-check"
@@ -118,7 +118,10 @@ function RouteComponent() {
                                     checked={contentType === type.id}
                                     onChange={handleContentTypeChange}
                                 />
-                                <label htmlFor={`contentType-${type.id}`} className="btn btn-outline-secondary">
+                                <label htmlFor={`contentType-${type.id}`} className="d-sm-none btn btn-outline-secondary btn-sm">
+                                    {type.label}
+                                </label>
+                                <label htmlFor={`contentType-${type.id}`} className="d-none d-sm-block btn btn-outline-secondary">
                                     {type.label}
                                 </label>
                             </div>
