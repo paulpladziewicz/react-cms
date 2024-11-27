@@ -55,7 +55,7 @@ function RouteComponent() {
         switch (contentType) {
             case 'group': {
                 return (
-                    <p>When creating a group, please include:
+                    <p>Please include the following details:
                         <ul>
                             <li>Title</li>
                             <li>Description</li>
@@ -87,8 +87,8 @@ function RouteComponent() {
                                        className="mb-1 form-label opacity-75 fw-medium fs-base">Email</label>
                                 <input type="email" className="form-control" id="email"
                                        placeholder="Enter email address" required="" name="email" value=""/>
-                                <div className="form-text">You're currently not logged in. If you'd like to make updates
-                                    to this listing easier in the future, please register or login.
+                                <div className="form-text">You're currently not logged in. Please provide your email
+                                    address in case we need more information.
                                 </div>
                             </div>
                         </div>
@@ -123,7 +123,7 @@ function RouteComponent() {
                             <label htmlFor="detail"
                                    className="mb-1 form-label opacity-75 fw-medium fs-base">Details</label>
                             <textarea className="form-control" id="detail" rows="7"
-                                      placeholder="Provide all details here about the content" required=""
+                                      placeholder="Provide as much detail as you can here" required=""
                                       name="detail"></textarea>
                         </div>
 
@@ -136,6 +136,8 @@ function RouteComponent() {
                                 accept="image/*"
                                 onChange={handleImageChange}
                             />
+                            <div className="form-text">You can also drag or paste images anywhere on this screen.
+                            </div>
                             <div className="d-flex flex-wrap mt-3">
                                 {images.map((image, index) => (
                                     <div key={index} className="position-relative me-3 mb-3" style={{width: '100px'}}>
