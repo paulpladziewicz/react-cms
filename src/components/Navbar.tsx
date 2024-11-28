@@ -22,7 +22,7 @@ function Navbar() {
                         <Link className="nav-link fw-semibold" to="/search">
                             <i className="ai-search fs-lg me-2"></i>Search
                         </Link>
-                        <Link className="nav-link fw-semibold" to="/events">
+                        <Link className="nav-link fw-semibold" to="/explore">
                             <i className="ai-map fs-lg me-2"></i>Explore
                         </Link>
                         <Link className="nav-link fw-semibold" to="/create">

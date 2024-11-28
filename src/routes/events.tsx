@@ -67,22 +67,19 @@ function RouteComponent() {
                 )}
               </div>
               <div className="mt-2 mt-md-0 col-md-8">
-                <h3 className="h4 mb-0" style={{ lineHeight: 1 }}>
-                  {event.detail.title}
+                <h3 style={{ lineHeight: 1 }}>
+                  <Link
+                      to={event.pathname}
+                      state={{event}}
+                  >
+                    {event.detail.title}
+                  </Link>
                 </h3>
                 <p className="my-2">
                   {event.detail.description.length > 180
-                    ? `${event.detail.description.substring(0, 180)}...`
-                    : event.detail.description}
+                      ? `${event.detail.description.substring(0, 180)}...`
+                      : event.detail.description}
                 </p>
-                <Link
-                  className="btn btn-lg btn-link p-0"
-                  to={event.pathname}
-                  state={{ event }}
-                >
-                  View Event
-                  <i className="ai-arrow-right ms-2"></i>
-                </Link>
               </div>
             </div>
           )
@@ -92,10 +89,10 @@ function RouteComponent() {
   }
 
   return (
-    <Container>
-      <Row>
-        <Col lg={10} className="mx-auto">
-          <nav aria-label="breadcrumb">
+      <Container>
+        <Row>
+          <Col lg={10} className="mx-auto">
+            <nav aria-label="breadcrumb">
             <ol className="breadcrumb mb-2">
               <li className="breadcrumb-item">
                 <a href="/">Home</a>

@@ -1,7 +1,8 @@
 import * as React from 'react'
 import {createFileRoute, Link, useLocation} from '@tanstack/react-router'
 import {useLayoutEffect} from "react";
-import {Col, Container, Row} from "react-bootstrap";
+import {Breadcrumb, Col, Container, Row} from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 
 export const Route = createFileRoute('/group/$slug')({
   component: RouteComponent,
@@ -10,6 +11,8 @@ export const Route = createFileRoute('/group/$slug')({
 function RouteComponent() {
     const {state} = useLocation()
     const content = state?.content
+    const userId = window.pageConfig?.userId
+
 
     useLayoutEffect(() => {
         window.scrollTo(0,0);
@@ -19,31 +22,60 @@ function RouteComponent() {
         return <div>No event data available.</div>
     }
 
-    const {detail} = content
-    const {title, description} = detail
+    const { detail, administrators } = content
+    const {title, description, announcements, group, adminCount, memberCount } = detail
+    const isAdmin = administrators.includes(userId);
+
+    const renderAnnouncements = () => {
+        return (
+            <section className="mb-4">
+                <h2 className="h1 m-0">Announcements</h2>
+                {isAdmin && <Button className="btn btn-link p-0">Add Announcement</Button>}
+                <ul className="list-unstyled">
+                    <li>
+                        <p className="my-3">There are no announcements at this time.</p>
+                    </li>
+                    <li className="my-4">
+                        <div className="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 className="mb-1">Announcement Title</h5>
+                                <p className="mb-1">Announcement Content</p>
+                                <small className="text-muted">Time Ago</small>
+                            </div>
+                            {isAdmin && (
+                                <Button className="btn btn-danger btn-sm ms-4">
+                                    <i className="ai-trash"></i>
+                                </Button>
+                            )}
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        );
+    }
 
     return (
         <Container>
             <Row>
-                <Col lg={10} xl={8} className="mx-auto">
+                <Col md={10} lg={8} className="mx-auto">
                     <nav aria-label="breadcrumb">
-                        <ol className="breadcrumb mb-2">
-                            <li className="breadcrumb-item"><Link to="/groups">Groups</Link></li>
-                            <li className="breadcrumb-item active" aria-current="page">{title}</li>
-                        </ol>
+                        <Breadcrumb>
+                            <Breadcrumb.Item href="/groups">Groups</Breadcrumb.Item>
+                            <Breadcrumb.Item active aria-current="page">
+                                {title}
+                            </Breadcrumb.Item>
+                        </Breadcrumb>
                     </nav>
-
                     <section>
+                        <h1 className="display-4 mb-0">{title}</h1>
 
-                        <div className="d-flex justify-content-between align-items-center mb-2">
-                            <h1 className="display-4 mb-0">{title}</h1>
-                        </div>
-
-                        <p
-                            className="fs-lg mt-2 mb-4"
-                            dangerouslySetInnerHTML={{__html: description}}
-                        />
+                        <Button className="btn btn-link p-0" disabled>
+                            Join Group
+                        </Button>
+                        <p className="fs-lg my-3">{description}</p>
                     </section>
+
+                    {renderAnnouncements()}
                 </Col>
             </Row>
         </Container>
