@@ -10,10 +10,10 @@ function Navbar() {
     return (
         <BootstrapNavbar expand="lg" bg="light" className="mb-4">
             <Container>
-                <BootstrapNavbar.Brand style={{ fontSize: '32px', fontWeight: 'bold' }}>
-                    <Link to="/">
-                        Fremont
-                        <span style={{ color: 'rgba(var(--ar-primary-rgb), var(--ar-bg-opacity))' }}>MI</span>
+                <BootstrapNavbar.Brand>
+                    <Link to="/" className="fw-bold text-decoration-none" style={{fontSize: '32px'}}>
+                        <span style={{color: 'rgb(67, 74, 87)'}}>Fremont</span>
+                        <span style={{color: 'rgba(var(--ar-primary-rgb), var(--ar-bg-opacity))'}}>MI</span>
                     </Link>
                 </BootstrapNavbar.Brand>
                 <BootstrapNavbar.Toggle aria-controls="navbarCollapse1" />
