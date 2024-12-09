@@ -5,7 +5,7 @@ import {Col, Row} from "react-bootstrap";
 import ContentListItem from "./ContentListItem.tsx";
 
 async function fetchEvents(contentType: string, page = 0) {
-    const { data } = await axios.get(`http://localhost:8080/api/content?contentType=${contentType}&page=${page}`)
+    const { data } = await axios.get(`/api/content?contentType=${contentType}&page=${page}`)
 
     return data;
 }
